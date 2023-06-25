@@ -1,7 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
 from src.item import Item
 
-
 test_price_count1 = Item('POCO', 15000, 6)
 test_price_count2 = Item('apple', 60000, 10)
 test_price_count3 = Item('POCO', 20000, 3)
@@ -27,3 +26,18 @@ def test_apply_discount():
     test_apply3.apply_discount()
     assert test_apply3.price == float(24000)
     pass
+
+
+def test_name():
+    model = Item('Apple', 20000, 2)
+    model.name = 'Samsung'
+    assert model.name == 'Samsung'
+    model.name = 'Samsung Full Flip'
+    assert model.name == 'Samsung Fu'
+
+
+def test_string_to_number():
+
+    assert Item.string_to_number('5') == 5
+    assert Item.string_to_number('7.0') == 7
+    assert Item.string_to_number('53.5') == 53
