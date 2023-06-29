@@ -1,4 +1,6 @@
 """Здесь надо написать тесты с использованием pytest для модуля item."""
+import pytest
+
 from src.item import Item
 
 test_price_count1 = Item('POCO', 15000, 6)
@@ -41,6 +43,11 @@ def test_string_to_number():
     assert Item.string_to_number('53.5') == 53
 
 
+def test_instantiate_from_csv():
+    Item.instantiate_from_csv()
+    assert len(Item.all) == 5
+
+
 def test___repr__():
     assert Item.__repr__(test_price_count1) == "Item('POCO', 15000, 6)"
     assert Item.__repr__(test_price_count2) == "Item('apple', 60000, 10)"
@@ -48,4 +55,6 @@ def test___repr__():
 
 
 def test___str__():
-    assert Item.__str__(test_apply1) == "'lol'"
+    assert Item.__str__(test_apply1) == "lol"
+    assert Item.__str__(test_apply2) == "pec"
+    assert Item.__str__(test_apply3) == "rok"
