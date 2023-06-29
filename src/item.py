@@ -9,6 +9,7 @@ class Item:
     pay_rate = 1.0
     all = []
     Path = '..\src\items.csv'
+
     def __init__(self, name: str, price: float, quantity: int) -> None:
         """
         Создание экземпляра класса item.
@@ -22,6 +23,20 @@ class Item:
         self.quantity = quantity
         self.total_price = self.price * self.quantity
         self.all.append(self)
+
+    def __repr__(self):
+        """
+        Магический метод __repr__ возвращающий информацию экземпляра класса для разработчика
+        """
+
+        return f"{self.__class__.__name__}('{self.__name}', {self.price}, {self.quantity})"
+
+    def __str__(self):
+        """
+        Магический метод __str__ возвращающий информацию экземпляра класса для пользователя
+        """
+
+        return f"{self.name}"
 
     def calculate_total_price(self) -> float:
         """
@@ -55,7 +70,8 @@ class Item:
         """
         Метод-класса инициализирующий экземпляры класса `Item` данными из файла _src/items.csv
         """
-        with open(filename, newline='') as csvfile:
+        Item.all = []
+        with open(filename, newline='', encoding=" Windows-1251") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 cls(row['name'], float(row['price']), cls.string_to_number(row['quantity']))
