@@ -36,7 +36,7 @@ class Item:
         Магический метод __str__ возвращающий информацию экземпляра класса для пользователя
         """
 
-        return f"'{self.name}'"
+        return f"{self.name}"
 
     def calculate_total_price(self) -> float:
         """
@@ -70,7 +70,8 @@ class Item:
         """
         Метод-класса инициализирующий экземпляры класса `Item` данными из файла _src/items.csv
         """
-        with open(filename, newline='') as csvfile:
+        Item.all = []
+        with open(filename, newline='', encoding=" Windows-1251") as csvfile:
             reader = csv.DictReader(csvfile)
             for row in reader:
                 cls(row['name'], float(row['price']), cls.string_to_number(row['quantity']))
