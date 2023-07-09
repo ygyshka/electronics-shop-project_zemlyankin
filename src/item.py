@@ -79,3 +79,12 @@ class Item:
     @staticmethod
     def string_to_number(number: str):
         return int(float(number))
+
+    def __add__(self, other):
+        """
+        Магический метод операции сложения екземпляров классаб
+        """
+        if issubclass(other.__class__, self.__class__):
+            return self.quantity + other.quantity
+        else:
+            raise TypeError("Экземпляр класса не наследуется")
