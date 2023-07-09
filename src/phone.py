@@ -26,5 +26,3 @@ class Phone(Item):
         """
         if isinstance(other, self.__class__):
             return self.quantity + other.quantity
-        else:
-            raise TypeError("Экземпляр не принадлежит классу")
