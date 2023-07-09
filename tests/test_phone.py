@@ -28,3 +28,4 @@ def test_number_of_sim(test_phone):
 
 def test___add__(test_phone):
     assert test_phone + test_phone == 12
+    assert test_phone + 5 == None
