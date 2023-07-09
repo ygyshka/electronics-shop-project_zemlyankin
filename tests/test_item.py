@@ -2,6 +2,7 @@
 import pytest
 
 from src.item import Item
+from src.phone import Phone
 
 test_price_count1 = Item('POCO', 15000, 6)
 test_price_count2 = Item('apple', 60000, 10)
@@ -37,7 +38,6 @@ def test_name():
 
 
 def test_string_to_number():
-
     assert Item.string_to_number('5') == 5
     assert Item.string_to_number('7.0') == 7
     assert Item.string_to_number('53.5') == 53
@@ -58,3 +58,7 @@ def test___str__():
     assert Item.__str__(test_apply1) == "lol"
     assert Item.__str__(test_apply2) == "pec"
     assert Item.__str__(test_apply3) == "rok"
+
+
+def test___add__():
+    assert test_price_count1 + test_price_count2 == 16
