@@ -86,5 +86,3 @@ class Item:
         """
         if issubclass(other.__class__, self.__class__):
             return self.quantity + other.quantity
-        else:
-            raise TypeError("Экземпляр класса не наследуется")
