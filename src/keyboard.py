@@ -19,7 +19,6 @@ class ChangeLang:
 
 
 class Keyboard(Item, ChangeLang):
-    def change_lang(self):
-        pass
+    pass
 
 
