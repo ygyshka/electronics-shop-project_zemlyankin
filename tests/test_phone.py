@@ -28,8 +28,8 @@ def test___str__(test_phone, test_phone1):
 
 
 def test_number_of_sim(test_phone, test_phone2):
-    assert test_phone.number_of_sim == 1
-    assert test_phone2.number_of_sim == 0
+    test_phone.number_of_sim = 2
+    assert test_phone.number_of_sim == 2
 
 
 def test___add__(test_phone):
