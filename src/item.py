@@ -2,6 +2,20 @@ import csv
 import os
 
 
+class InstantiateCSVError(Exception):
+    def __init__(self, *args, **kwargs):
+        if len(args) > 0:
+            self.message = args[0]
+        else:
+            self.message = 'Файл item__bed.csv.csv поврежден'
+
+    def __repr__(self):
+        return f"{self.__class__.__name__}('{self.message})"
+
+    def __str__(self):
+        return f"{self.message}"
+
+
 class Item:
     """
     Класс для представления товара в магазине.
@@ -67,15 +81,19 @@ class Item:
             self.__name = name
 
     @classmethod
-    def instantiate_from_csv(cls, filename=Path):
-        """
-        Метод-класса инициализирующий экземпляры класса `Item` данными из файла _src/items.csv
-        """
-        Item.all = []
-        with open(filename, newline='', encoding=" Windows-1251") as csvfile:
-            reader = csv.DictReader(csvfile)
-            for row in reader:
-                cls(row['name'], float(row['price']), cls.string_to_number(row['quantity']))
+    def instantiate_from_csv(cls):
+        cls.all = []
+        try:
+            filename = cls.Path
+            with open(filename, newline='', encoding=" Windows-1251") as csvfile:
+                reader = csv.DictReader(csvfile)
+                for row in reader:
+                    cls.all.append(cls(row['name'], row['price'], cls.string_to_number(row['quantity'])))
+
+        except FileNotFoundError:
+            raise FileNotFoundError(f'FileNotFoundError: Отсутствует файл {cls.Path}')
+        except (IndexError, KeyError):
+            raise InstantiateCSVError(f'Файл {cls.Path} поврежден')
 
     @staticmethod
     def string_to_number(number: str):
